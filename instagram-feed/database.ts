@@ -1,9 +1,33 @@
 const initialData = {
+    profile: {
+    avatar: require("../assets/instagram-feed-images/avatar1.jpg"),
+    },
+    stories: [
+      {
+        id:1,
+        avatar: require("../assets/instagram-feed-images/avatar1.jpg"),
+        name:"Asghar",
+        isSee:false,
+      },
+      {
+        id:2,
+        avatar: require("../assets/instagram-feed-images/avatar2.jpg"),
+        name:"Mammad",
+        isSee:false,
+      },
+      {
+        id:3,
+        avatar: require("../assets/instagram-feed-images/avatar3.jpg"),
+        name:"Hasan",
+        isSee:true,
+      },
+    ],
+
     articles: [
       {
         id: 1,
         avatar: require("../assets/instagram-feed-images/avatar1.jpg"),
-        name: "5.min.craft",
+        name: "Asghar",
         image: require("../assets/instagram-feed-images/img1.jpg"),
         likes: "57",
         commentCount: "1",
@@ -12,7 +36,7 @@ const initialData = {
       {
         id: 2,
         avatar: require("../assets/instagram-feed-images/avatar1.jpg"),
-        name: "5.min.craft",
+        name: "Mammad",
         image: require("../assets/instagram-feed-images/img2.jpg"),
         likes: "16",
         commentCount: "3",
@@ -21,7 +45,7 @@ const initialData = {
       {
         id: 3,
         avatar: require("../assets/instagram-feed-images/avatar3.jpg"),
-        name: "thangflycomicsoffical",
+        name: "Hasan",
         image: require("../assets/instagram-feed-images/img3.jpg"),
         likes: "6",
         commentCount: "32",
@@ -48,16 +72,16 @@ const initialData = {
     ],
   };
   
-//   const data = {
-//     ...initialData,
-//     articles: initialData.articles.map((article) => {
-//       return {
-//         ...article,
-//         comments: `View all ${article.commentCount} comments`
-//       }
-//     })
-//   };
+  const data = {
+    ...initialData,
+    articles: initialData.articles.map((article) => {
+      return {
+        ...article,
+        comments: `View all ${article.commentCount} comments`
+      }
+    })
+  };
   
-  export default initialData;
+  export default data;
   
   

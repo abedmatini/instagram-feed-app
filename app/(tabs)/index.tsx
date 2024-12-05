@@ -18,9 +18,7 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText style={styles.title} type="title">Welcome Bud</ThemedText>
-
-
+        <ThemedText type="title">Welcome Buddy</ThemedText>
         <HelloWave />
       </ThemedView>
       <View style={styles.container}>
@@ -90,9 +88,9 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
   },
-  title: {
-    color: 'blue',
-  },
+  // title: {
+  //   color: 'blue',
+  // },
   container: {
     flex: 1,
     backgroundColor: "#fff",
