@@ -1,9 +1,11 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet, Platform } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+
+ import initialData  from '../../instagram-feed/database';
 
 export default function HomeScreen() {
   return (
@@ -17,8 +19,25 @@ export default function HomeScreen() {
       }>
       <ThemedView style={styles.titleContainer}>
         <ThemedText style={styles.title} type="title">Welcome Bud</ThemedText>
+
+
         <HelloWave />
       </ThemedView>
+      <View style={styles.container}>
+            <FlatList
+                data={initialData.articles}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                    <View style={styles.card}>
+                        <Image source={item.avatar} style={styles.avatar} />
+                        <Text style={styles.name}>{item.name}</Text>
+                        <Image source={item.image} style={styles.image} />
+                        <Text style={styles.likes}>{item.likes} Likes</Text>
+                        <Text style={styles.comments}>{item.comments}</Text>
+                    </View>
+                )}
+            />
+        </View>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
@@ -74,4 +93,38 @@ const styles = StyleSheet.create({
   title: {
     color: 'blue',
   },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    padding: 10,
+},
+card: {
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+    paddingBottom: 10,
+},
+avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+},
+name: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginVertical: 5,
+},
+image: {
+    width: "100%",
+    height: 200,
+    borderRadius: 10,
+},
+likes: {
+    fontSize: 14,
+    marginVertical: 5,
+},
+comments: {
+    fontSize: 12,
+    color: "#555",
+},
 });

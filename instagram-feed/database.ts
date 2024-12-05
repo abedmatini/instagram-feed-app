@@ -48,16 +48,16 @@ const initialData = {
     ],
   };
   
-  const data = {
-    ...initialData,
-    articles: initialData.articles.map((article) => {
-      return {
-        ...article,
-        comments: `View all ${article.commentCount} comments`
-      }
-    })
-  };
+//   const data = {
+//     ...initialData,
+//     articles: initialData.articles.map((article) => {
+//       return {
+//         ...article,
+//         comments: `View all ${article.commentCount} comments`
+//       }
+//     })
+//   };
   
-  export default data;
+  export default initialData;
   
   
