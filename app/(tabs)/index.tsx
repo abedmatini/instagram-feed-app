@@ -4,6 +4,7 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import Header from '@/components/Header';
 
  import initialData  from '../../instagram-feed/database';
 
@@ -17,6 +18,8 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
+              <Header />
+
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome Buddy</ThemedText>
         <HelloWave />
