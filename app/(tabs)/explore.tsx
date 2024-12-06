@@ -5,7 +5,8 @@ import { Feather } from '@expo/vector-icons';
 import Header from '@/components/Header';
 import Stories from '@/components/Stories';
 
-import initialData  from '../../instagram-feed/database';
+import data  from '../../instagram-feed/database';
+import { Constants } from 'expo-constants';
 
 const INSTAGRAM_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/800px-Instagram_logo.svg.png'
 
@@ -39,17 +40,12 @@ export default function Instagram() {
 
       </View>
       <FlatList
-          data={initialData.articles}
+          data={data.articles}
+          renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-              <View style={styles.card}>
-                  <Image source={item.avatar} style={styles.avatar} />
-                  <Text style={styles.name}>{item.name}</Text>
-                  <Image source={item.image} style={styles.image} />
-                  <Text style={styles.likes}>{item.likes} Likes</Text>
-                  <Text style={styles.comments}>{item.comments}</Text>
-              </View>
-          )}
+          showsVerticalScrollIndicator={false}
+
+          
       />
     </View>
 </SafeAreaView>
@@ -78,8 +74,9 @@ const styles = StyleSheet.create({
   // },
   container: {
     flex: 1,
+    // paddingTime: Constants.statusBarheight
     backgroundColor: "azure",
-    // alignItems: 'center',
+    // // alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
 },
@@ -126,5 +123,12 @@ logo: {
   height: 30,
   resizeMode: "contain",
 
-}
+},
+stories: {
+  borderBottomWidth: 1,
+  borderBottomColor: "#dbdbdb",
+  height: 104,
+  padding: 10,
+  backgroundColor: "#fafafa",
+},
 });

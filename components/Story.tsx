@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 
-
 export default function Story({avatar, name, isCreateStory = false, isSeen }) {
     return (
         <TouchableOpacity style={styles.user}>
@@ -25,8 +24,8 @@ export default function Story({avatar, name, isCreateStory = false, isSeen }) {
                             <Feather name="plus" size={14} color="#fff" />
                         </View>
                     )}
-
                 </View>
+                <Text style={styles.name}>{name}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -58,17 +57,17 @@ const styles = StyleSheet.create({
         bottom: 0,
         width: 20,
         height: 20,
-        backgroundColor: 'white',
+        backgroundColor: 'blue',
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
     },
     name: {
-        alignSelf: 'center',
+        textAlign: 'center',
         fontSize: 12,
         lineHeight: 16,
         color: 'black',
-        maxWidth: '85%',
+        maxWidth: 85,
     }
 
 });

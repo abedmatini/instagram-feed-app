@@ -1,25 +1,26 @@
 const initialData = {
     profile: {
-    avatar: require("../assets/instagram-feed-images/avatar1.jpg"),
+    avatar: require("../assets/instagram-feed-images/avatar.png"),
+    isSeen:false,
     },
     stories: [
       {
         id:1,
         avatar: require("../assets/instagram-feed-images/avatar1.jpg"),
         name:"Asghar",
-        isSee:false,
+        isSeen:false,
       },
       {
         id:2,
         avatar: require("../assets/instagram-feed-images/avatar2.jpg"),
         name:"Mammad",
-        isSee:false,
+        isSeen:true,
       },
       {
         id:3,
         avatar: require("../assets/instagram-feed-images/avatar3.jpg"),
         name:"Hasan",
-        isSee:true,
+        isSeen:false,
       },
     ],
 

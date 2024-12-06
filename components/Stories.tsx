@@ -11,6 +11,7 @@ export default function Stories({stories, profile}) {
                 name="Clarian North"
                 avatar={profile.avatar}
                 isCreateStory={true}
+                isSeen={profile.isSeen}
                 />
                 <Story
                 name={item.name}
