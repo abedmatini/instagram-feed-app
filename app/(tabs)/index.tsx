@@ -1,4 +1,5 @@
-import { View, Text, Image, FlatList, StyleSheet, Platform } from 'react-native';
+import { View, Text, Image, FlatList, StyleSheet, Platform, TouchableOpacity } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -6,7 +7,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import Header from '@/components/Header';
 
- import initialData  from '../../instagram-feed/database';
+import initialData  from '../../instagram-feed/database';
 
 export default function HomeScreen() {
   return (
