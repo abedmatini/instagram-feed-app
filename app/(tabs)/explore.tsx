@@ -2,11 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { View, Text, Image, FlatList, StyleSheet, Platform, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
+
 import Header from '@/components/Header';
 import Stories from '@/components/Stories';
 
 import data  from '../../instagram-feed/database';
 import { Constants } from 'expo-constants';
+import Article from '@/components/Article';
 
 const INSTAGRAM_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/800px-Instagram_logo.svg.png'
 
@@ -18,10 +20,11 @@ export default function Instagram() {
         <View style={styles.stories}>
           <Stories stories={data.stories} profile={data.profile}/>
         </View>
+        <Article item={item} />
           </>
       )
     } else {
-      return;
+      return <Article item={item} />
     }
   }
 
