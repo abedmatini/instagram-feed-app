@@ -18,6 +18,8 @@ export default function Article({ item }) {
         return article ? parseInt(article.likes, 10) : 0; // Convert to number for easier manipulation
       });
 
+      const [isLiked, setIsLiked] = useState(false);
+
 
     return (
         <View style={styles.article}>
@@ -49,6 +51,29 @@ export default function Article({ item }) {
             {/* Action Buttons */}
             <View style={styles.action}>
                 <View style={styles.actionLeft}>
+                    {/* Message Button */}
+                    <TouchableOpacity style={styles.actionButton}
+
+                        onPress = {() => {
+                            setIsLiked(!isLiked);
+                            if(isLiked) { 
+                                setLikes(prevLikes => prevLikes - 1);
+                            } else {
+                                setLikes(prevLikes => prevLikes + 1);
+                            }
+                        }}
+                        >
+                <View
+                    style={[
+                    styles.iconBackground,
+                    { backgroundColor: isLiked ? 'pink' : 'transparent' }, // Conditional background color
+                    ]}
+                >           
+                <Feather name="heart" color={isLiked ? "red" : "black"} size={24} />
+                </View>
+
+                        
+                    </TouchableOpacity>
                     {/* Message Button */}
                     <TouchableOpacity style={styles.actionButton}>
                         <Feather name="message-circle" size={24} />
@@ -143,4 +168,11 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: '#555',
     },
+    iconBackground: {
+        width: 30, // Size slightly larger than the icon for a "background" effect
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 15, // Makes the background circular
+      },
 });
