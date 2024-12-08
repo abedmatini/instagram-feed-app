@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, Image, FlatList, StyleSheet, Platform, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, Image, FlatList, StyleSheet, Platform, TouchableOpacity, SafeAreaView, Button } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-
-
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import Header from '@/components/Header';
 import Stories from '@/components/Stories';
 
@@ -13,6 +13,29 @@ import Article from '@/components/Article';
 const INSTAGRAM_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/800px-Instagram_logo.svg.png'
 
 export default function Instagram() {
+  // const [hasPermission, setHasPermission] = useState(null);
+  const [showCamera, setShowCamera] = useState(false);
+  // const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
+  const [facing, setFacing] = useState<CameraType>('back');
+  const [permission, requestPermission] = useCameraPermissions();
+
+  if (!permission) {
+    // Camera permissions are still loading.
+    return <View />;
+  }
+  if (!permission.granted) {
+    // Camera permissions are not granted yet.
+    return (
+      <View style={styles.container}>
+        <Text style={styles.message}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
+  function toggleCameraFacing() {
+    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  }
+
   function renderItem({item, index}) {
     if (index ===0){
       return (
@@ -33,9 +56,14 @@ export default function Instagram() {
       <StatusBar style="dark" />
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>
-          <Feather name='camera' size={24} />
-        </TouchableOpacity>
+
+          <TouchableOpacity onPress={()=> setShowCamera(!showCamera)}>
+            <Feather 
+              name='camera' 
+              size={24} 
+            />
+          </TouchableOpacity>
+
         <Image source={{uri: INSTAGRAM_LOGO}} style={styles.logo} />
         <TouchableOpacity>
           <Feather name='send' size={24} />
@@ -47,9 +75,14 @@ export default function Instagram() {
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
           showsVerticalScrollIndicator={false}
-
-          
       />
+      { showCamera && (
+        <CameraView style={styles.camera} >
+          <Feather name='x' size={24} />
+
+      </CameraView>
+      )
+    }
     </View>
 </SafeAreaView>
   );
@@ -133,5 +166,13 @@ stories: {
   height: 104,
   padding: 10,
   backgroundColor: "#fafafa",
+},
+message: {
+  textAlign: 'center',
+  paddingBottom: 10,
+},
+camera: {
+  flex: 1,
+  // padding: 50,
 },
 });
