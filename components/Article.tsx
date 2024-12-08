@@ -12,11 +12,24 @@ import {
 } from 'react-native'
 import {Feather} from '@expo/vector-icons';
 
+function getInitialState(item) {
+    const article = data.articles.find(x => x.id === item.id);
+    return {
+        likes:article.likes,
+        commentCount: article.commentCount,
+    }
+}
+
 export default function Article({ item }) {
-    const [likes, setLikes] = useState(() => {
-        const article = data.articles.find(article => article.id === item.id);
-        return article ? parseInt(article.likes, 10) : 0; // Convert to number for easier manipulation
-      });
+    const initialState = getInitialState(item);
+    const [likes, setLikes] = useState(initialState.likes);
+    // const [likes, setLikes] = useState(() => {
+    //     const article = data.articles.find(article => article.id === item.id);
+    //     return article ? parseInt(article.likes, 10) : 0; // Convert to number for easier manipulation
+    //   });
+    const [commentCount, setCommentCount] = useState(initialState.commentCount);
+
+    //   const [commentCount, setCommentCount] = useState(data.articles.find(article => article.id === item.id)?.commentCount);
 
       const [isLiked, setIsLiked] = useState(false);
 
@@ -94,7 +107,7 @@ export default function Article({ item }) {
             {/* Post Info */}
             <View style={styles.info}>
                 <Text style={styles.likes}>{likes} likes</Text>
-                <Text style={styles.commentCount}>view all comments</Text>
+                <Text style={styles.commentCount}>view all {commentCount} comments</Text>
             </View>
         </View>
     );
