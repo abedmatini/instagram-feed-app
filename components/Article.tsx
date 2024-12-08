@@ -1,6 +1,6 @@
 import data  from '../instagram-feed/database';
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     StyleSheet,
     View,
@@ -33,6 +33,11 @@ export default function Article({ item }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [comment, setComment] = useState('');
     const [isLiked, setIsLiked] = useState(false);
+
+    // useEffect(() => {
+    //         console.log(comment);
+    // }, [comment]);
+
 
     const handleComment = () => {
         setIsModalVisible(true); // Open the modal
