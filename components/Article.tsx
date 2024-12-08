@@ -1,6 +1,6 @@
-import data  from '../../instagram-feed/database';
+import data  from '../instagram-feed/database';
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
     StyleSheet,
     View,
@@ -13,6 +13,12 @@ import {
 import {Feather} from '@expo/vector-icons';
 
 export default function Article({ item }) {
+    const [likes, setLikes] = useState(() => {
+        const article = data.articles.find(article => article.id === item.id);
+        return article ? parseInt(article.likes, 10) : 0; // Convert to number for easier manipulation
+      });
+
+
     return (
         <View style={styles.article}>
             {/* Header Section */}
@@ -62,7 +68,7 @@ export default function Article({ item }) {
 
             {/* Post Info */}
             <View style={styles.info}>
-                <Text style={styles.likes}>likes</Text>
+                <Text style={styles.likes}>{likes} likes</Text>
                 <Text style={styles.commentCount}>view all comments</Text>
             </View>
         </View>
