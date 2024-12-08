@@ -8,7 +8,8 @@ import {
     Image,
     TouchableOpacity,
     TextInput,
-    Alert
+    Alert,
+    Modal
 } from 'react-native'
 import {Feather} from '@expo/vector-icons';
 
@@ -28,11 +29,21 @@ export default function Article({ item }) {
     //     return article ? parseInt(article.likes, 10) : 0; // Convert to number for easier manipulation
     //   });
     const [commentCount, setCommentCount] = useState(initialState.commentCount);
-
     //   const [commentCount, setCommentCount] = useState(data.articles.find(article => article.id === item.id)?.commentCount);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [comment, setComment] = useState('');
+    const [isLiked, setIsLiked] = useState(false);
 
-      const [isLiked, setIsLiked] = useState(false);
-
+    const handleComment = () => {
+        setIsModalVisible(true); // Open the modal
+      };
+    
+      const submitComment = () => {
+        console.log("Comment Submitted:", comment); // Handle the comment logic
+        setComment(""); // Clear the input field
+        setIsModalVisible(false); // Close the modal
+        setCommentCount(prevCommentCount => prevCommentCount + 1);
+      };
 
     return (
         <View style={styles.article}>
@@ -84,14 +95,44 @@ export default function Article({ item }) {
                 >           
                 <Feather name="heart" color={isLiked ? "red" : "black"} size={24} />
                 </View>
-
                         
                     </TouchableOpacity>
                     {/* Message Button */}
-                    <TouchableOpacity style={styles.actionButton}>
-                        <Feather name="message-circle" size={24} />
-                    </TouchableOpacity>
+                        <View style={styles.container}>
+                        {/* Comment Button */}
+                        <TouchableOpacity style={styles.actionButton} onPress={handleComment}>
+                            <Feather name="message-circle" size={24} />
+                        </TouchableOpacity>
 
+                        {/* Modal for Comment Input */}
+                        <Modal
+                            visible={isModalVisible}
+                            transparent
+                            animationType="slide"
+                            onRequestClose={() => setIsModalVisible(false)} // Close modal on back press
+                        >
+                            <View style={styles.modalContainer}>
+                            <View style={styles.modalContent}>
+                                <Text style={styles.modalTitle}>Write a Comment</Text>
+                                <TextInput
+                                style={styles.input}
+                                placeholder="Type your comment here..."
+                                value={comment}
+                                onChangeText={text => setComment(text)}
+                                multiline
+                                />
+                                <View style={styles.modalActions}>
+                                <TouchableOpacity style={styles.cancelButton} onPress={() => setIsModalVisible(false)}>
+                                    <Text style={styles.cancelButtonText}>Cancel</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.submitButton} onPress={submitComment}>
+                                    <Text style={styles.submitButtonText}>Submit</Text>
+                                </TouchableOpacity>
+                                </View>
+                            </View>
+                            </View>
+                        </Modal>
+                        </View>
                     {/* Send Button */}
                     <TouchableOpacity style={styles.actionButton}>
                         <Feather name="send" size={24} />
@@ -187,5 +228,66 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 15, // Makes the background circular
+      },
+      container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Darkened background for focus
+      },
+      modalContent: {
+        width: '90%',
+        padding: 20,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        alignItems: 'center',
+      },
+      modalTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 15,
+      },
+      input: {
+        width: '100%',
+        height: 100,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 8,
+        padding: 10,
+        textAlignVertical: 'top',
+        marginBottom: 20,
+      },
+      modalActions: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+      },
+      cancelButton: {
+        padding: 10,
+        backgroundColor: '#ccc',
+        borderRadius: 5,
+        flex: 1,
+        marginRight: 5,
+        alignItems: 'center',
+      },
+      cancelButtonText: {
+        color: '#000',
+      },
+      submitButton: {
+        padding: 10,
+        backgroundColor: '#2196F3',
+        borderRadius: 5,
+        flex: 1,
+        marginLeft: 5,
+        alignItems: 'center',
+      },
+      submitButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
       },
 });
