@@ -37,12 +37,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     avatarBorder: {
-        width: 50,
-        height: 50,
+        width: 54,
+        height: 54,
         borderRadius: 25,
         borderWidth: 2,
-        margin: 10,
-        alignSelf: 'center',
+        marginBottom: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
     avatar: {
         width: 46,
