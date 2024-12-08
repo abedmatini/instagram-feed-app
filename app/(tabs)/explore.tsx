@@ -77,10 +77,13 @@ export default function Instagram() {
           showsVerticalScrollIndicator={false}
       />
       { showCamera && (
+      <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center' }}>
+
         <CameraView style={styles.camera} >
           <Feather name='x' size={24} />
 
       </CameraView>
+      </View>
       )
     }
     </View>
@@ -173,6 +176,10 @@ message: {
 },
 camera: {
   flex: 1,
-  // padding: 50,
+  padding: 200,
+  // height: '60%',
+  width: "80%",
+  // height: 500,
+  borderRadius: 10,
 },
 });
